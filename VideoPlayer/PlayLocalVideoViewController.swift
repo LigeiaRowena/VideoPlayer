@@ -8,7 +8,6 @@
 
 import UIKit
 import MediaPlayer
-import MobileCoreServices
 
 // MARK: PlayLocalVideoViewController
 

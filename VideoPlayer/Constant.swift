@@ -8,20 +8,14 @@
 
 import Foundation
 
-
 // MARK: - Constant
 
-
 class Constant {
-    
     
     struct CellIdentifiers {
     }
     
-    
     struct Segues {
-        static let playVideoSegue = "playVideo"
-        static let playLocalVideoSegue = "playLocalVideo"
     }
 }
 
