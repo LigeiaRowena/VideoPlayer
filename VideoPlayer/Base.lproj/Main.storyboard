@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,7 +58,7 @@
             </objects>
             <point key="canvasLocation" x="210.5" y="280.5"/>
         </scene>
-        <!--Play Video View Controller-->
+        <!--Play Video from URL-->
         <scene sceneID="OXk-cG-Hl5">
             <objects>
                 <viewController id="5dV-j6-xCV" customClass="PlayVideoViewController" customModule="VideoPlayer" sceneMemberID="viewController">
@@ -95,26 +94,17 @@
                                     <outlet property="delegate" destination="5dV-j6-xCV" id="Kqw-6z-381"/>
                                 </connections>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6In-3P-i9a">
-                                <rect key="frame" x="16" y="168" width="343" height="479"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5Mw-f6-y8e" firstAttribute="centerX" secondItem="yjE-ma-xnB" secondAttribute="centerX" id="6uu-Ml-DCU"/>
-                            <constraint firstItem="6In-3P-i9a" firstAttribute="trailing" secondItem="yjE-ma-xnB" secondAttribute="trailingMargin" id="IN9-EQ-91n"/>
                             <constraint firstItem="5Mw-f6-y8e" firstAttribute="top" secondItem="q6y-Zn-kaA" secondAttribute="bottom" constant="19" id="gz0-aM-fyh"/>
-                            <constraint firstItem="hEz-yi-qsA" firstAttribute="top" secondItem="6In-3P-i9a" secondAttribute="bottom" constant="20" id="ikv-hl-Lgk"/>
-                            <constraint firstItem="6In-3P-i9a" firstAttribute="leading" secondItem="yjE-ma-xnB" secondAttribute="leadingMargin" id="n5E-8W-kEB"/>
-                            <constraint firstItem="6In-3P-i9a" firstAttribute="top" secondItem="ALT-yW-PA3" secondAttribute="bottom" constant="14" id="nX1-qc-zyD"/>
                             <constraint firstItem="ALT-yW-PA3" firstAttribute="top" secondItem="5Mw-f6-y8e" secondAttribute="bottom" constant="11" id="sfn-NH-jXB"/>
                             <constraint firstItem="ALT-yW-PA3" firstAttribute="centerX" secondItem="yjE-ma-xnB" secondAttribute="centerX" id="ud7-vM-avl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="mSC-05-Rn2"/>
+                    <navigationItem key="navigationItem" title="Play Video from URL" id="mSC-05-Rn2"/>
                     <connections>
-                        <outlet property="movieView" destination="6In-3P-i9a" id="YFW-x7-IOR"/>
                         <outlet property="textField" destination="5Mw-f6-y8e" id="FuN-iQ-CNm"/>
                     </connections>
                 </viewController>
@@ -122,7 +112,7 @@
             </objects>
             <point key="canvasLocation" x="796.5" y="-409.5"/>
         </scene>
-        <!--Play Local Video View Controller-->
+        <!--Play local Video-->
         <scene sceneID="0LF-S5-7On">
             <objects>
                 <viewController id="z4H-dL-pZk" customClass="PlayLocalVideoViewController" customModule="VideoPlayer" sceneMemberID="viewController">
@@ -133,13 +123,51 @@
                     <view key="view" contentMode="scaleToFill" id="CT8-er-y5V">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SNP-yK-KzT">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="videoCellIdentifier" id="skl-3h-hci">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="skl-3h-hci" id="Ij0-vC-f2L">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBF-fQ-s7v">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="z4H-dL-pZk" id="SWB-VX-6hY"/>
+                                    <outlet property="delegate" destination="z4H-dL-pZk" id="nED-TR-Ut2"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SNP-yK-KzT" firstAttribute="top" secondItem="f7e-Xm-jd0" secondAttribute="bottom" id="DvA-vU-zR7"/>
+                            <constraint firstItem="SNP-yK-KzT" firstAttribute="leading" secondItem="CT8-er-y5V" secondAttribute="leading" id="GY4-jc-BSu"/>
+                            <constraint firstItem="QNV-o9-zZW" firstAttribute="top" secondItem="SNP-yK-KzT" secondAttribute="bottom" id="bK0-cZ-YSF"/>
+                            <constraint firstAttribute="trailing" secondItem="SNP-yK-KzT" secondAttribute="trailing" id="kQM-wX-YuK"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="w7S-hV-e7f"/>
+                    <navigationItem key="navigationItem" title="Play local Video" id="w7S-hV-e7f"/>
+                    <connections>
+                        <outlet property="tableView" destination="SNP-yK-KzT" id="Okd-IA-XD4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qv0-hg-la1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="797" y="688"/>
+            <point key="canvasLocation" x="796.5" y="687.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Fuc-2l-xVM">

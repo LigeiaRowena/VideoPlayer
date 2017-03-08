@@ -13,6 +13,7 @@ import Foundation
 class Constant {
     
     struct CellIdentifiers {
+        static let videoCellIdentifier = "videoCellIdentifier"
     }
     
     struct Segues {

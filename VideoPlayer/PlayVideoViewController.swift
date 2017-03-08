@@ -14,9 +14,6 @@ import MediaPlayer
 class PlayVideoViewController: UIViewController, UITextFieldDelegate {
                 
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var movieView: UIView!
-    var moviePlayerViewController:MPMoviePlayerViewController!
-
     
     // MARK: Init/launch viewController
     
@@ -38,15 +35,16 @@ class PlayVideoViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func playVideo(_ sender: Any) {
         let url: NSURL = NSURL(string: textField.text!)!
-        moviePlayerViewController = MPMoviePlayerViewController(contentURL: url as URL!)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(notification:)), name: NSNotification.Name.MPMoviePlayerPlaybackStateDidChange, object: nil)
+        let moviePlayerViewController = MPMoviePlayerViewController(contentURL: url as URL!)
+        NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(notification:)), name: NSNotification.Name.MPMoviePlayerPlaybackStateDidChange, object: moviePlayerViewController?.moviePlayer)
         self.presentMoviePlayerViewControllerAnimated(moviePlayerViewController)
     }
     
     // MARK: MPMoviePlayerViewController private methods
     
     func playbackStateDidChange(notification:NSNotification) {
-        switch moviePlayerViewController.moviePlayer.playbackState {
+        let moviePlayer = notification.object as! MPMoviePlayerController
+        switch moviePlayer.playbackState {
         case MPMoviePlaybackState.stopped:
             //
             break
