@@ -4,7 +4,7 @@ The app supports iTunes file sharing.
 
 Main features:
 
-- Minimum OS: iOS 9
+- Minimum OS: iOS 8.4
 - ARC
 - Language used: Swift
 - Devices: iPad/iPhone
