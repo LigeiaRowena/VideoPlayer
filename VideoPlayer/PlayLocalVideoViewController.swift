@@ -42,7 +42,7 @@ class PlayLocalVideoViewController: UIViewController, UITableViewDataSource, UIT
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        return directoryContents
+        return directoryContents.sorted(){ $0 < $1 }
     }
     
     // MARK: UITableViewDataSource/UITableViewDelegate
