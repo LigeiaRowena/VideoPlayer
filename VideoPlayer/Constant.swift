@@ -17,6 +17,12 @@ class Constant {
     }
     
     struct Segues {
+        static let openDirectorySegue = "openDirectorySegue"
+    }
+    
+    struct Paths {
+        static let noVideoExtensions = ["txt", "rtf"]
+        static let videoExtensions = ["mov", "mp4", "avi", "mkv"]
     }
 }
 

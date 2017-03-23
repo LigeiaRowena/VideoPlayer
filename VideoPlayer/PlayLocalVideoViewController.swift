@@ -7,87 +7,115 @@
 //
 
 import UIKit
-import MediaPlayer
 
-// MARK: PlayLocalVideoViewController
+// MARK: - PlayLocalVideoViewController
 
-class PlayLocalVideoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-        
+class PlayLocalVideoViewController: UIViewController, PlayVideoDataModelDelegate {
+    
+    var url: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     @IBOutlet weak var tableView: UITableView!
-    var data: [String]!
-    
-    // MARK: Init/launch viewController
-    
+    fileprivate var dataArray = [VideoModel]() {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
+    let dataSource = PlayVideoDataModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+        dataSource.delegate = self
     }
     
-    func loadData() {
-        data = documentsContent()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        dataSource.requestData(url: url)
     }
     
-    // MARK: I/O methods
-    
-    func filePath(fileName: String) -> URL {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        return URL(fileURLWithPath: documentsPath).appendingPathComponent(fileName)
-    }
-    
-    func documentsContent() -> [String]! {
-        var directoryContents: [String]!
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        do {
-            directoryContents = try FileManager.default.contentsOfDirectory(atPath: documentsPath)
-        } catch let error as NSError {
-            print(error.localizedDescription)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constant.Segues.openDirectorySegue {
+            let directoryViewController = segue.destination as! DirectoryViewController
+            let model = dataArray[(self.tableView.indexPathForSelectedRow?.row)!]
+            directoryViewController.url = model.url!
+            self.tableView.deselectRow(at: self.tableView.indexPathForSelectedRow!, animated: true)
         }
-        return directoryContents.sorted(){ $0 < $1 }
     }
     
-    // MARK: UITableViewDataSource/UITableViewDelegate
+    // MARK: PlayVideoDataModelDelegate
+    
+    func didFailDataUpdateWithError(error: Error) {
+        showInformationAlert(title: "Warning", message: "Error while reading local data: \(error.localizedDescription)")
+    }
+    
+    func didRecieveDataUpdate(data: [VideoModel]) {
+        dataArray = data
+    }
+}
+
+// MARK: UITableViewDelegate
+
+extension PlayLocalVideoViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = dataArray[indexPath.row]
+        switch model.fileType {
+        case .videoFile:
+            showVideo(url: model.url!)
+        case .directory:
+            self.performSegue(withIdentifier: Constant.Segues.openDirectorySegue, sender: nil)
+        default: break
+        }
+    }
+}
+
+// MARK: UITableViewDataSource
+
+extension PlayLocalVideoViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let file = data[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.CellIdentifiers.videoCellIdentifier) ?? UITableViewCell(style: .`default`, reuseIdentifier: Constant.CellIdentifiers.videoCellIdentifier)
-        cell.textLabel?.text = file
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.identifier, for: indexPath) as? VideoTableViewCell {
+            cell.configureWithModel(model: dataArray[indexPath.row])
+            return cell
+        }
+        return UITableViewCell()
+    }
+}
+
+class DirectoryViewController: PlayLocalVideoViewController {
+    
+    // MARK: UITableViewDelegate/UITableViewDataSource
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = dataArray[indexPath.row]
+        switch model.fileType {
+        case .videoFile:
+            showVideo(url: model.url!)
+        case .directory:
+            showInformationAlert(title: "Warning", message: "No valid video file")
+        default: break
+        }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let url = filePath(fileName: data[indexPath.row])
-        let moviePlayerViewController = MPMoviePlayerViewController(contentURL: url as URL!)
-        NotificationCenter.default.addObserver(self, selector: #selector(playbackStateDidChange(notification:)), name: NSNotification.Name.MPMoviePlayerPlaybackStateDidChange, object: moviePlayerViewController?.moviePlayer)
-        self.presentMoviePlayerViewControllerAnimated(moviePlayerViewController)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: VideoTableViewCell.identifier, for: indexPath) as? VideoTableViewCell {
+            cell.configureWithModel(model: dataArray[indexPath.row])
+            return cell
+        }
+        return UITableViewCell()
     }
     
-    // MARK: MPMoviePlayerViewController private methods
     
-    func playbackStateDidChange(notification:NSNotification) {
-        let moviePlayer = notification.object as! MPMoviePlayerController
-        switch moviePlayer.playbackState {
-        case MPMoviePlaybackState.stopped:
-            //
-            break
-        case MPMoviePlaybackState.playing:
-            //
-            break
-        case MPMoviePlaybackState.paused:
-            //
-            break
-        case MPMoviePlaybackState.interrupted:
-            //
-            break
-        default:
-            break
+    override func didRecieveDataUpdate(data: [VideoModel]) {
+        dataArray = data.filter { (model: VideoModel) -> Bool in
+            return model.fileType == .videoFile
         }
     }
 }
+

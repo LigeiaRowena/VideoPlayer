@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF06E0061E72A9CD000933AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06E0051E72A9CD000933AB /* VideoModel.swift */; };
+		DF12BDBD1E8132AB000353AC /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF12BDBC1E8132AB000353AC /* VideoTableViewCell.swift */; };
+		DF12BDBF1E8151CE000353AC /* PlayVideoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF12BDBE1E8151CE000353AC /* PlayVideoDataModel.swift */; };
 		DFE7C1AF1E6EA9EA003D8263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE7C1AE1E6EA9EA003D8263 /* AppDelegate.swift */; };
 		DFE7C1B11E6EA9EA003D8263 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE7C1B01E6EA9EA003D8263 /* ViewController.swift */; };
 		DFE7C1B41E6EA9EA003D8263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFE7C1B21E6EA9EA003D8263 /* Main.storyboard */; };
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DF06E0051E72A9CD000933AB /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		DF12BDBC1E8132AB000353AC /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		DF12BDBE1E8151CE000353AC /* PlayVideoDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoDataModel.swift; sourceTree = "<group>"; };
 		DFE7C1AB1E6EA9EA003D8263 /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFE7C1AE1E6EA9EA003D8263 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DFE7C1B01E6EA9EA003D8263 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +86,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF12BDB91E813243000353AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DF06E0051E72A9CD000933AB /* VideoModel.swift */,
+				DF12BDBE1E8151CE000353AC /* PlayVideoDataModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		DF12BDBA1E813248000353AC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DFE7C1B21E6EA9EA003D8263 /* Main.storyboard */,
+				DFE7C1B71E6EA9EA003D8263 /* LaunchScreen.storyboard */,
+				DF12BDBC1E8132AB000353AC /* VideoTableViewCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		DF12BDBB1E81324F000353AC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DFE7C1B01E6EA9EA003D8263 /* ViewController.swift */,
+				DFE7C1DC1E6EAB98003D8263 /* PlayVideoViewController.swift */,
+				DFE7C1E01E6EB4FC003D8263 /* PlayLocalVideoViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		DFE7C1A21E6EA9EA003D8263 = {
 			isa = PBXGroup;
 			children = (
@@ -103,14 +138,12 @@
 		DFE7C1AD1E6EA9EA003D8263 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				DF12BDB91E813243000353AC /* Model */,
+				DF12BDBA1E813248000353AC /* View */,
+				DF12BDBB1E81324F000353AC /* Controller */,
 				DFE7C1AE1E6EA9EA003D8263 /* AppDelegate.swift */,
-				DFE7C1B01E6EA9EA003D8263 /* ViewController.swift */,
-				DFE7C1DC1E6EAB98003D8263 /* PlayVideoViewController.swift */,
-				DFE7C1E01E6EB4FC003D8263 /* PlayLocalVideoViewController.swift */,
 				DFE7C1E21E6EB836003D8263 /* Constant.swift */,
-				DFE7C1B21E6EA9EA003D8263 /* Main.storyboard */,
 				DFE7C1B51E6EA9EA003D8263 /* Assets.xcassets */,
-				DFE7C1B71E6EA9EA003D8263 /* LaunchScreen.storyboard */,
 				DFE7C1BA1E6EA9EA003D8263 /* Info.plist */,
 			);
 			path = VideoPlayer;
@@ -271,7 +304,10 @@
 			files = (
 				DFE7C1B11E6EA9EA003D8263 /* ViewController.swift in Sources */,
 				DFE7C1AF1E6EA9EA003D8263 /* AppDelegate.swift in Sources */,
+				DF12BDBD1E8132AB000353AC /* VideoTableViewCell.swift in Sources */,
+				DF12BDBF1E8151CE000353AC /* PlayVideoDataModel.swift in Sources */,
 				DFE7C1DD1E6EAB98003D8263 /* PlayVideoViewController.swift in Sources */,
+				DF06E0061E72A9CD000933AB /* VideoModel.swift in Sources */,
 				DFE7C1E11E6EB4FC003D8263 /* PlayLocalVideoViewController.swift in Sources */,
 				DFE7C1E31E6EB836003D8263 /* Constant.swift in Sources */,
 			);
