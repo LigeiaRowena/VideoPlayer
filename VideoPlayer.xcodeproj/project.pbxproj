@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF06E0061E72A9CD000933AB /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF06E0051E72A9CD000933AB /* VideoModel.swift */; };
+		DF0967D61E8515AE00F047CC /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0967D51E8515AE00F047CC /* DirectoryViewController.swift */; };
 		DF12BDBD1E8132AB000353AC /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF12BDBC1E8132AB000353AC /* VideoTableViewCell.swift */; };
 		DF12BDBF1E8151CE000353AC /* PlayVideoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF12BDBE1E8151CE000353AC /* PlayVideoDataModel.swift */; };
 		DFE7C1AF1E6EA9EA003D8263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFE7C1AE1E6EA9EA003D8263 /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		DF06E0051E72A9CD000933AB /* VideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		DF0967D51E8515AE00F047CC /* DirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
 		DF12BDBC1E8132AB000353AC /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		DF12BDBE1E8151CE000353AC /* PlayVideoDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayVideoDataModel.swift; sourceTree = "<group>"; };
 		DFE7C1AB1E6EA9EA003D8263 /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 				DFE7C1B01E6EA9EA003D8263 /* ViewController.swift */,
 				DFE7C1DC1E6EAB98003D8263 /* PlayVideoViewController.swift */,
 				DFE7C1E01E6EB4FC003D8263 /* PlayLocalVideoViewController.swift */,
+				DF0967D51E8515AE00F047CC /* DirectoryViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			files = (
 				DFE7C1B11E6EA9EA003D8263 /* ViewController.swift in Sources */,
 				DFE7C1AF1E6EA9EA003D8263 /* AppDelegate.swift in Sources */,
+				DF0967D61E8515AE00F047CC /* DirectoryViewController.swift in Sources */,
 				DF12BDBD1E8132AB000353AC /* VideoTableViewCell.swift in Sources */,
 				DF12BDBF1E8151CE000353AC /* PlayVideoDataModel.swift in Sources */,
 				DFE7C1DD1E6EAB98003D8263 /* PlayVideoViewController.swift in Sources */,
@@ -463,7 +467,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F8Q5XK7RJ8;
 				INFOPLIST_FILE = VideoPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fbi.VideoPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -477,7 +481,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = F8Q5XK7RJ8;
 				INFOPLIST_FILE = VideoPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fbi.VideoPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -11,8 +11,11 @@ import Foundation
 // MARK: - VideoModel
 
 struct VideoModel {
-    enum FileType {
-        case videoFile, noVideoFile, directory, unknown
+    enum FileType: String {
+        case videoFile = "Video"
+        case noVideoFile = "Other file"
+        case directory = "Directory"
+        case unknown = "Unknown"
     }
     enum LoadingError: Error {
         case noFile
@@ -33,13 +36,13 @@ struct VideoModel {
             self.fileExtension = url!.pathExtension
             self.fileType = .unknown
             self.fileSize = 0
-            try! fileAttributes(url: url!)
+            try! setFileAttributes(url: url!)
         } else {
             return nil
         }
     }
     
-    mutating func fileAttributes(url: URL) throws  {
+    mutating func setFileAttributes(url: URL) throws  {
         do {
             let attr = try FileManager.default.attributesOfItem(atPath: url.path)
             self.creationDate = attr[FileAttributeKey.creationDate] as? Date
