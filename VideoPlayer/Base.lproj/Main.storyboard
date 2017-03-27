@@ -168,7 +168,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Play local Video" id="FEw-e1-VbD"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="0as-9q-V4s">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="a1E-db-D7k" eventType="valueChanged" id="wwZ-4s-Ami"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
+                        <outlet property="refresh" destination="0as-9q-V4s" id="6uz-vm-mAY"/>
                         <segue destination="LzW-mn-tnl" kind="show" identifier="openDirectorySegue" id="72g-SU-A02"/>
                     </connections>
                 </tableViewController>

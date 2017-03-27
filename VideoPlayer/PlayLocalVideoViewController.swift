@@ -24,7 +24,8 @@ class PlayLocalVideoViewController: UITableViewController, PlayVideoDataModelDel
     }
     let dataSource = PlayVideoDataModel()
     var searchController = UISearchController(searchResultsController: nil)
-
+    @IBOutlet weak var refresh: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.delegate = self        
@@ -35,6 +36,14 @@ class PlayLocalVideoViewController: UITableViewController, PlayVideoDataModelDel
         searchController.searchBar.autocapitalizationType = .none
         tableView.tableHeaderView = searchController.searchBar
         definesPresentationContext = true
+    }
+    
+    @IBAction func refresh(_ sender: UIRefreshControl) {
+        // disable searching
+        searchController.isActive = false
+        searchController.searchBar.text = ""
+        // fetch data
+        dataSource.requestData(url: url)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,10 +122,12 @@ class PlayLocalVideoViewController: UITableViewController, PlayVideoDataModelDel
     // MARK: PlayVideoDataModelDelegate
     
     func didFailDataUpdateWithError(error: Error) {
+        refresh.endRefreshing()
         showInformationAlert(title: "Warning", message: "Error while reading local data: \(error.localizedDescription)")
     }
     
     func didRecieveDataUpdate(data: [VideoModel]) {
+        refresh.endRefreshing()
         let directoryArray = data.filter { $0.fileType == .directory}
         let videoArray = data.filter { $0.fileType == .videoFile}
         dataArray = [videoArray, directoryArray]
