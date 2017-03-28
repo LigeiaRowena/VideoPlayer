@@ -16,8 +16,6 @@ class PlayVideoViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // test url string
-        textField.text = "http://jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v"
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
