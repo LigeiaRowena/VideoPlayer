@@ -56,7 +56,7 @@ class PlayLocalVideoViewController: UITableViewController, PlayVideoDataModelDel
         if segue.identifier == Constant.Segues.openDirectorySegue {
             let directoryViewController = segue.destination as! DirectoryViewController
             let model = dataArray[(self.tableView.indexPathForSelectedRow?.section)!][(self.tableView.indexPathForSelectedRow?.row)!]
-            directoryViewController.url = model.url!
+            directoryViewController.url = model.url
             self.tableView.deselectRow(at: self.tableView.indexPathForSelectedRow!, animated: true)
         }
     }
@@ -64,7 +64,7 @@ class PlayLocalVideoViewController: UITableViewController, PlayVideoDataModelDel
     func filterContentForSearchText(searchText: String) {
         filteredDataArray = dataArray.filter { (array: [VideoModel]) -> Bool in
             return array.filter({ (data: VideoModel) -> Bool in
-                return data.fileName!.lowercased().contains(searchText.lowercased())
+                return data.fileName.lowercased().contains(searchText.lowercased())
             }).count > 0
         }
         tableView.reloadData()
@@ -76,7 +76,7 @@ class PlayLocalVideoViewController: UITableViewController, PlayVideoDataModelDel
         let model = dataArray[indexPath.section][indexPath.row]
         switch model.fileType {
         case .videoFile:
-            showVideo(url: model.url!)
+            showVideo(url: model.url)
         case .directory:
             self.performSegue(withIdentifier: Constant.Segues.openDirectorySegue, sender: nil)
         default: break
@@ -128,9 +128,15 @@ class PlayLocalVideoViewController: UITableViewController, PlayVideoDataModelDel
     
     func didRecieveDataUpdate(data: [VideoModel]) {
         refresh.endRefreshing()
+        dataArray.removeAll()
         let directoryArray = data.filter { $0.fileType == .directory}
+        if !directoryArray.isEmpty {
+            dataArray.append(directoryArray)
+        }
         let videoArray = data.filter { $0.fileType == .videoFile}
-        dataArray = [videoArray, directoryArray]
+        if !videoArray.isEmpty {
+            dataArray.append(videoArray)
+        }
     }
 }
 

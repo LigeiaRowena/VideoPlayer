@@ -22,7 +22,7 @@ class Constant {
     
     struct Paths {
         static let noVideoExtensions = ["txt", "rtf"]
-        static let videoExtensions = ["mov", "mp4", "avi", "mkv"]
+        static let videoExtensions = ["mov", "mp4", "avi", "mkv", "3gpp", "3gpp2", "mpeg-4", "mp2", "mp3"]
     }
 }
 

@@ -14,7 +14,9 @@ class DirectoryViewController: PlayLocalVideoViewController {
     
     override func didRecieveDataUpdate(data: [VideoModel]) {
         let videoArray = data.filter { $0.fileType == .videoFile}
-        dataArray = [videoArray]
+        if !videoArray.isEmpty {
+            dataArray = [videoArray]
+        }
     }
 }
 
